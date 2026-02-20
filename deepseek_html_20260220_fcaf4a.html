@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Весеннее творческое свидание | Мама и ребенок</title>
+    <!-- Подключаем шрифты Google Fonts для красоты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome для иконок (версия 6 бесплатная) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Стили - наша весенняя, нежная тема */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fffaf5; /* Очень теплый, почти белый фон */
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Цветовая гамма */
+        :root {
+            --primary: #e8a1a1; /* Нежный розовый */
+            --primary-dark: #d38a8a;
+            --accent: #a8d5ba; /* Мятный */
+            --text-dark: #5e5e5e;
+            --bg-light: #fff5f0;
+            --shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Типографика */
+        h1, h2, h3 {
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+            color: #5a4a4a;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* Шапка */
+        .hero {
+            background: linear-gradient(rgba(255, 245, 240, 0.9), rgba(255, 235, 225, 0.95)), url('photo1.jpg') center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            border-bottom-left-radius: 30% 5%;
+            border-bottom-right-radius: 30% 5%;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #5a4a4a;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--primary-dark);
+            margin-top: 10px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin: 20px 0 30px;
+            color: #6b5b5b;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(232, 161, 161, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(232, 161, 161, 0.4);
+        }
+
+        /* Карточки особенностей */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Галерея (листающаяся) */
+        .gallery-section {
+            background-color: var(--bg-light);
+        }
+
+        .gallery-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery-slider img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #5a4a4a;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .gallery-btn:hover {
+            background: white;
+        }
+
+        .gallery-btn.prev {
+            left: 20px;
+        }
+
+        .gallery-btn.next {
+            right: 20px;
+        }
+
+        .gallery-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #d9c5c5;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+        }
+
+        /* Информация о событии */
+        .event-details {
+            background: white;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .detail-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .detail-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            background: white;
+            padding: 15px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .detail-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #5a4a4a;
+        }
+
+        /* Карточка ведущей */
+        .host {
+            background: var(--bg-light);
+        }
+
+        .host-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+
+        .host-info {
+            flex: 2;
+        }
+
+        .host-info h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .host-info .title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .host-placeholder {
+            flex: 1;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* Регистрация */
+        .register {
+            text-align: center;
+            background: linear-gradient(135deg, #fff5f0, #ffe8e0);
+            border-radius: 40px;
+            margin: 40px auto;
+        }
+
+        .register p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .register-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .register-links .btn {
+            min-width: 200px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Предупреждение о фотографиях */
+        .photo-notice {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #999;
+            border-top: 1px solid #f0e0d0;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero h1 span {
+                font-size: 1.5rem;
+            }
+            .host-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+            .gallery-slider img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>
+                Весеннее творческое свидание
+                <span>мама и ребенок</span>
+            </h1>
+            <p>Особая весенняя встреча для души и совместного творчества</p>
+            <a href="#register" class="btn">Хочу участвовать!</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Почему это нужно попробовать?</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Новый формат</h3>
+                    <p>Вы будете не родитель и ребенок, а партнеры по творчеству. Это меняет всё!</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>Мамам — перезагрузка</h3>
+                    <p>Творческий полет и минуты отдыха, пока дети увлечены процессом.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <h3>Детям — радость</h3>
+                    <p>Развитие воображения и гордость за свой маленький шедевр.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Женский круг</h3>
+                    <p>Вдохновение и расслабление в кругу прекрасных мам.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Листающаяся галерея -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2>Как это было</h2>
+            <div class="gallery-container">
+                <div class="gallery-slider" id="gallerySlider">
+                    <!-- Здесь должны быть ваши фото. Добавьте photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg в ту же папку -->
+                    <img src="photo1.jpg" alt="Фото с мероприятия 1" onerror="this.src='https://via.placeholder.com/800x500/f5e6e6/8c6e6e?text=Фото+1'">
+                    <img src="photo2.jpg" alt="Фото с мероприятия 2" onerror="this.src='https://via.placeholder.com/800x500/f5d6d6/8c6e6e?text=Фото+2'">
+                    <img src="photo3.jpg" alt="Фото с мероприятия 3" onerror="this.src='https://via.placeholder.com/800x500/f5c6c6/8c6e6e?text=Фото+3'">
+                    <img src="photo4.jpg" alt="Фото с мероприятия 4" onerror="this.src='https://via.placeholder.com/800x500/f5b6b6/8c6e6e?text=Фото+4'">
+                </div>
+                <button class="gallery-btn prev" onclick="changeSlide(-1)">❮</button>
+                <button class="gallery-btn next" onclick="changeSlide(1)">❯</button>
+            </div>
+            <div class="gallery-dots" id="galleryDots"></div>
+            <p class="photo-notice">*Добавьте свои фотографии в папку с сайтом (photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg) или замените пути в коде</p>
+        </div>
+    </section>
+
+    <section class="event-details">
+        <div class="container">
+            <h2>Дата и место</h2>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>📅 Дата</h4>
+                    <p>9 марта 2026</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>⏰ Время</h4>
+                    <p>12:00 (около 2 часов)</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>📍 Место</h4>
+                    <p>М. Белорусская<br>Ленинградский проспект 7, стр. 1, 3 этаж</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-child"></i>
+                    <h4>👶 Для детей</h4>
+                    <p>от 6 до 11 лет</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="host">
+        <div class="container">
+            <div class="host-card">
+                <div class="host-placeholder">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="host-info">
+                    <h3>Наталья</h3>
+                    <span class="title">Чуткий педагог и талантливая художница</span>
+                    <p>Наталья найдет подход и к маме, и к ребенку. Под ее руководством даже те, кто никогда не брал кисть в руки, создадут настоящий шедевр! Атмосфера творчества, поддержки и весеннего настроения гарантирована.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="register" id="register">
+        <div class="container">
+            <h2>Участие бесплатное!</h2>
+            <p>Количество пар (мама+ребенок) ограничено. Регистрация обязательна.</p>
+            <div class="register-links">
+                <a href="#" class="btn">Записаться по ссылке</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-envelope"></i> Написать в личные сообщения</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 1rem;">📍 Ждем вас! Не забудьте захватить хорошее настроение :)</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Весеннее творческое свидание | Мама и ребенок</p>
+            <p style="margin-top: 10px;">
+                <a href="#" style="color: #999; margin: 0 10px;">#МамаИРебенок</a>
+                <a href="#" style="color: #999; margin: 0 10px;">#СовместноеТворчество</a>
+                <a href="#" style="color: #999; margin: 0 10px;">#ВесеннееВдохновение</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Скрипт для галереи -->
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.gallery-slider img');
+        const slider = document.getElementById('gallerySlider');
+        const dotsContainer = document.getElementById('galleryDots');
+
+        // Создаем точки (dots) для навигации
+        function createDots() {
+            for (let i = 0; i < slides.length; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.onclick = () => currentSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === slideIndex);
+            });
+        }
+
+        function showSlide(index) {
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+            
+            // Проверка, что слайды существуют
+            if (slider && slides.length > 0) {
+                slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                updateDots();
+            }
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        // Инициализация, если есть слайды
+        if (slides.length > 0) {
+            createDots();
+            showSlide(slideIndex);
+        } else {
+            // Если нет фото, скроем кнопки
+            document.querySelectorAll('.gallery-btn').forEach(btn => btn.style.display = 'none');
+        }
+    </script>
+    <!-- Обратите внимание: ссылки нужно заменить на ваши актуальные. -->
+</body>
+</html>
