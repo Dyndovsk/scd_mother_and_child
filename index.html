@@ -140,34 +140,6 @@
             margin-top: 40px;
         }
 
-        <!-- Мини-блок с важным текстом -->
-        <div style="
-            background: linear-gradient(135deg, #fce4e4, #f8d7d7);
-            border-radius: 60px;
-            padding: 30px 40px;
-            margin: 40px auto;
-            max-width: 900px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(232, 161, 161, 0.15);
-            border: 2px dashed #e8a1a1;
-        ">
-            <p style="
-                font-family: 'Playfair Display', serif;
-                font-size: 1.5rem;
-                font-weight: 400;
-                color: #5a4a4a;
-                margin: 0;
-                line-height: 1.6;
-            ">
-                <span style="display: block; margin-bottom: 15px;">
-                    🌸 <strong>Мамам</strong> — перезагрузка, творческий полет и минуты отдыха.
-                </span>
-                <span style="display: block;">
-                    🎨 <strong>Детям</strong> — радость созидания, развитие воображения и гордость за шедевр!
-                </span>
-            </p>
-        </div>
-
         .feature-item {
             background: white;
             padding: 30px 20px;
@@ -193,90 +165,122 @@
             font-weight: 600;
         }
 
-        /* Галерея (листающаяся) */
+        /* === ТАБЛИЧНАЯ ГАЛЕРЕЯ (СЕТКА) === */
         .gallery-section {
             background-color: var(--bg-light);
         }
 
-        .gallery-container {
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
+            border-radius: 24px;
             overflow: hidden;
-            border-radius: 20px;
             box-shadow: var(--shadow);
-        }
-
-        .gallery-slider {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .gallery-slider img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .gallery-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #5a4a4a;
+            background: white;
             transition: all 0.3s ease;
-            z-index: 10;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Легкая подпись для фото (необязательно, но добавляет шарма) */
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(90,74,74,0.8), transparent);
+            color: white;
+            padding: 12px 15px 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Модальное окно для увеличения фото */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
             backdrop-filter: blur(5px);
         }
 
-        .gallery-btn:hover {
-            background: white;
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 4px solid white;
+            object-fit: contain;
         }
 
-        .gallery-btn.prev {
-            left: 20px;
-        }
-
-        .gallery-btn.next {
-            right: 20px;
-        }
-
-        .gallery-dots {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #d9c5c5;
-            border-radius: 50%;
-            margin: 0 5px;
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
             cursor: pointer;
-            transition: background 0.3s ease;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .dot.active {
+        .modal-close:hover {
             background: var(--primary);
+            transform: scale(1.1);
         }
 
         /* Информация о событии */
         .event-details {
             background: white;
-            img { width: 200px; height: 150px; }
         }
 
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
@@ -285,6 +289,11 @@
             padding: 30px;
             border-radius: 20px;
             text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
         }
 
         .detail-card i {
@@ -391,6 +400,7 @@
             color: #999;
             margin-top: 30px;
             font-style: italic;
+            text-align: center;
         }
 
         /* Футер */
@@ -414,8 +424,15 @@
                 text-align: center;
                 padding: 30px;
             }
-            .gallery-slider img {
-                height: 300px;
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -432,61 +449,64 @@
         </div>
     </section>
 
-    <section>
-        <!--
-        <div class="container">
-            <h2>Это замечательный  шанс:</h2>
-            <div class="features">
-                <div class="feature-item">
-                    <i class="fas fa-paint-brush"></i>
-                    
-                    <img src="photo2.jpg">
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-heart"></i>
-                    
-                    <p>Создать свои картины на бесплатном мастер-классе по правополушарному рисованию! (Кисти, краски — всё предоставим).</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-star"></i>
-                    
-                    <p>Отдохнуть за душевным чаепитием, пока дети общаются и играют.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-users"></i>
-                    
-                    <p>Вдохновиться и расслабиться в кругу прекрасных женщин, пока ваши дети рядом, увлечены творчеством.</p>
-                </div>
-            </div>
-        </div>-->
-    </section>
+    <!-- Мини-блок с важным текстом (вставлен после hero, как было изначально) -->
+    <div style="background: linear-gradient(135deg, #fce4e4, #f8d7d7); border-radius: 60px; padding: 30px 40px; margin: -30px auto 40px auto; max-width: 900px; text-align: center; box-shadow: 0 10px 25px rgba(232, 161, 161, 0.15); border: 2px dashed #e8a1a1;">
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 400; color: #5a4a4a; margin: 0; line-height: 1.6;">
+            <span style="display: block; margin-bottom: 15px;">
+                🌸 <strong>Мамам</strong> — перезагрузка, творческий полет и минуты отдыха.
+            </span>
+            <span style="display: block;">
+                🎨 <strong>Детям</strong> — радость созидания, развитие воображения и гордость за шедевр!
+            </span>
+        </p>
+    </div>
 
-    <!-- Листающаяся галерея -->
+    <!-- ===== ТАБЛИЧНАЯ ГАЛЕРЕЯ (СЕТКА ИЗОБРАЖЕНИЙ) ===== -->
     <section class="gallery-section">
         <div class="container">
-            <h2>Как это было</h2>
-            <div class="gallery-container">
-                <div class="gallery-slider" id="gallerySlider">
-                    <!-- Здесь должны быть ваши фото. Добавьте photo1.jpg, photo2.jpg, photo3.jpg, photo4.jpg в ту же папку -->
-                    <img src="photo2.jpg" alt="Фото с мероприятия 2" onerror="this.src='https://via.placeholder.com/800x500/f5d6d6/8c6e6e?text=Фото+2'">
-                    <img src="photo3.jpg" alt="Фото с мероприятия 3" onerror="this.src='https://via.placeholder.com/800x500/f5c6c6/8c6e6e?text=Фото+3'">
-                    <img src="photo5.jpg" alt="Фото с мероприятия 5" onerror="this.src='https://via.placeholder.com/800x500/f5e6e6/8c6e6e?text=Фото+1'">
-                    <img src="photo6.jpg" alt="Фото с мероприятия 6" onerror="this.src='https://via.placeholder.com/800x500/f5d6d6/8c6e6e?text=Фото+2'">
-                    <img src="photo7.jpg" alt="Фото с мероприятия 7" onerror="this.src='https://via.placeholder.com/800x500/f5c6c6/8c6e6e?text=Фото+3'">
-                    <img src="photo8.jpg" alt="Фото с мероприятия 8" onerror="this.src='https://via.placeholder.com/800x500/f5b6b6/8c6e6e?text=Фото+4'">
-                    <img src="photo9.jpg" alt="Фото с мероприятия 9" onerror="this.src='https://via.placeholder.com/800x500/f5e6e6/8c6e6e?text=Фото+1'">
-                    <img src="photo10.jpg" alt="Фото с мероприятия 10" onerror="this.src='https://via.placeholder.com/800x500/f5d6d6/8c6e6e?text=Фото+2'">
-                    <img src="photo11.jpg" alt="Фото с мероприятия 11" onerror="this.src='https://via.placeholder.com/800x500/f5c6c6/8c6e6e?text=Фото+3'">
-                    <img src="photo12.jpg" alt="Фото с мероприятия 12" onerror="this.src='https://via.placeholder.com/800x500/f5b6b6/8c6e6e?text=Фото+4'">
+            <h2>Наши вдохновенные моменты</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Фотографии. Для демонстрации используются placeholder с вашими названиями файлов, 
+                     при наличии реальных фото они подгрузятся, иначе плейсхолдеры в стиле -->
+                <div class="gallery-item">
+                    <img src="photo2.jpg" alt="Счастливые мамы и дети творят" onerror="this.src='https://via.placeholder.com/400x300/fce4e4/d38a8a?text=Весеннее+творчество'">
+                    <!--<div class="gallery-caption">🌸 Совместное рисование</div>-->
                 </div>
-                <button class="gallery-btn prev" onclick="changeSlide(-1)">❮</button>
-                <button class="gallery-btn next" onclick="changeSlide(1)">❯</button>
+                <div class="gallery-item">
+                    <img src="photo3.jpg" alt="Дети рисуют картины" onerror="this.src='https://via.placeholder.com/400x300/f8d7d7/d38a8a?text=Детские+шедевры'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo5.jpg" alt="Уютная атмосфера" onerror="this.src='https://via.placeholder.com/400x300/fce4e4/c7a5a5?text=Теплая+атмосфера'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo6.jpg" alt="Мама и ребенок за работой" onerror="this.src='https://via.placeholder.com/400x300/f8e2e2/b58e8e?text=Семейное+творчество'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo7.jpg" alt="Ребята увлечены творчеством" onerror="this.src='https://via.placeholder.com/400x300/f5d6d6/a97a7a?text=Детское+счастье'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo8.jpg" alt="Готовые работы" onerror="this.src='https://via.placeholder.com/400x300/ffe6e6/d38a8a?text=Наши+шедевры'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo9.jpg" alt="Мамы отдыхают" onerror="this.src='https://via.placeholder.com/400x300/fce4e4/c19797?text=Минуты+покоя'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo10.jpg" alt="Фото с мероприятия" onerror="this.src='https://via.placeholder.com/400x300/f0dad6/cfaeae?text=Весенняя+встреча'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo11.jpg" alt="Рисование с ведущей" onerror="this.src='https://via.placeholder.com/400x300/f8cfcf/d19494?text=Мастер-класс'">
+                </div>
+                <div class="gallery-item">
+                    <img src="photo12.jpg" alt="Выставка работ" onerror="this.src='https://via.placeholder.com/400x300/fcebeb/bd8f8f?text=Выставка+картин'">
+                </div>
             </div>
-            <div class="gallery-dots" id="galleryDots"></div>
+            <div class="photo-notice">
+                <i class="fas fa-camera"></i> Нажмите на фото, чтобы рассмотреть поближе
+            </div>
         </div>
     </section>
 
-    <section class="event-details">
+    <!--<section class="event-details">
         <div class="container">
             <h2>Дата и место</h2>
             <div class="details-grid">
@@ -510,12 +530,9 @@
                     <h4>👶 Для детей</h4>
                     <p>от 6 до 11 лет</p>
                 </div>
-                <div class="detail-card">
-                    <img src="photo2.jpg">
-                </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <section class="host">
         <div class="container">
@@ -526,7 +543,7 @@
                 <div class="host-info">
                     <h3>Наталья</h3>
                     <span class="title">Проведет встречу</span>
-                    <p>Наталья — чуткий педагог и талантливая художница, которая найдет подход и к маме, и к ребенку.</p>
+                    <p>Наталья — чуткий педагог и талантливая художница, которая найдет подход и к маме, и к ребенку. Вдохновляет на творчество и дарит ощущение праздника.</p>
                 </div>
             </div>
         </div>
@@ -534,11 +551,10 @@
 
     <section class="register" id="register">
         <div class="container">
-            <h2>Участие бесплатное!</h2>
-            <p>Количество пар (мама+ребенок) ограничено. Регистрация закрыта</p>
-            <p>Если вы хотите получить информацию о следующем мероприятии, оставьте свою <a href="mailto:belchonok891@yandex.ru">почту</a></p>
+            <h2>Предстоящее событие!</h2>
+            <p>Совсем скоро, 5 апреля, состоится новый мастер-класс по изготовлению топперов для куличей.</p>
+            <p>Если вы хотите получить информацию о следующем мероприятии, оставьте свою <a href="mailto:belchonok891@yandex.ru" style="color: var(--primary);">почту</a></p>
             <div class="register-links">
-                <!--<a href="https://forms.yandex.ru/u/69987d9102848fabf16f931d" class="btn">Записаться по ссылке</a>-->
                 <a href="https://t.me/Tasha_ginger_art" class="btn btn-outline"><i class="fas fa-envelope"></i> Написать в личные сообщения</a>
             </div>
             <p style="margin-top: 30px; font-size: 1rem;">📍 Ждем вас! Не забудьте захватить хорошее настроение :)</p>
@@ -548,91 +564,79 @@
     <footer>
         <div class="container">
             <p>© 2026 Местная религиозная организация Церковь Евангельских Христиан Твоя Церковь</p>
-            <a href="https://vk.ru/yourchurch" target="_blank"><i class="fa-brands fa-vk"></i></i>Наш ВК</a>
+            <a href="https://vk.ru/yourchurch" target="_blank" style="color: #e8a1a1; text-decoration: none;"><i class="fab fa-vk"></i> Наш ВК</a>
             <p style="margin-top: 10px;">
-                <a href="#" style="color: #999; margin: 0 10px;">#МамаИРебенок</a>
-                <a href="#" style="color: #999; margin: 0 10px;">#СовместноеТворчество</a>
-                <a href="#" style="color: #999; margin: 0 10px;">#ВесеннееВдохновение</a>
+                <a href="#" style="color: #999; margin: 0 10px; text-decoration: none;">#МамаИРебенок</a>
+                <a href="#" style="color: #999; margin: 0 10px; text-decoration: none;">#СовместноеТворчество</a>
+                <a href="#" style="color: #999; margin: 0 10px; text-decoration: none;">#ВесеннееВдохновение</a>
             </p>
         </div>
     </footer>
 
-    <!-- Скрипт для галереи -->
+    <!-- Скрипт для модального окна (увеличение фото по клику) и дополнительной плавности -->
     <script>
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.gallery-slider img');
-        const slider = document.getElementById('gallerySlider');
-        const dotsContainer = document.getElementById('galleryDots');
-        let autoScrollInterval; // переменная для интервала
-    
-        // Создаем точки (dots) для навигации
-        function createDots() {
-            for (let i = 0; i < slides.length; i++) {
-                const dot = document.createElement('span');
-                dot.classList.add('dot');
-                dot.onclick = () => currentSlide(i);
-                dotsContainer.appendChild(dot);
+        // Создаем модальное окно для просмотра увеличенных фото
+        const modal = document.createElement('div');
+        modal.classList.add('modal');
+        const modalImg = document.createElement('img');
+        modalImg.classList.add('modal-content');
+        const closeBtn = document.createElement('div');
+        closeBtn.classList.add('modal-close');
+        closeBtn.innerHTML = '&times;';
+        modal.appendChild(modalImg);
+        modal.appendChild(closeBtn);
+        document.body.appendChild(modal);
+
+        // Все элементы галереи
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        // Функция открытия модального окна
+        function openModal(imgSrc, altText) {
+            modalImg.src = imgSrc;
+            modalImg.alt = altText || 'Фото галереи';
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // запрещаем прокрутку фона
+        }
+        
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Добавляем обработчики на каждое изображение в галерее
+        galleryItems.forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+                // Получаем реальный src (даже если из-за onerror подменился, берем актуальный)
+                const originalSrc = img.src;
+                const caption = item.querySelector('.gallery-caption')?.innerText || 'Фото';
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Открываем модалку с текущим изображением
+                    openModal(originalSrc, caption);
+                });
+                // Добавляем курсор pointer, чтобы было понятно
+                img.style.cursor = 'pointer';
             }
-        }
-    
-        function updateDots() {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === slideIndex);
-            });
-        }
-    
-        function showSlide(index) {
-            if (index >= slides.length) slideIndex = 0;
-            if (index < 0) slideIndex = slides.length - 1;
-            
-            if (slider && slides.length > 0) {
-                slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-                updateDots();
+        });
+        
+        // Закрытие модального окна по клику на фон или крестик
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target === closeBtn) {
+                closeModal();
             }
-        }
-    
-        function changeSlide(n) {
-            slideIndex += n;
-            showSlide(slideIndex);
-            // Перезапускаем автопрокрутку после ручного переключения
-            resetAutoScroll();
-        }
-    
-        function currentSlide(n) {
-            slideIndex = n;
-            showSlide(slideIndex);
-            resetAutoScroll();
-        }
-    
-        // Функция для автоматической прокрутки
-        function startAutoScroll() {
-            autoScrollInterval = setInterval(() => {
-                slideIndex++;
-                showSlide(slideIndex);
-            }, 3000); // меняется каждые 3 секунды (можно изменить)
-        }
-    
-        // Функция для сброса и перезапуска автопрокрутки
-        function resetAutoScroll() {
-            clearInterval(autoScrollInterval);
-            startAutoScroll();
-        }
-    
-        // Инициализация, если есть слайды
-        if (slides.length > 0) {
-            createDots();
-            showSlide(slideIndex);
-            startAutoScroll(); // запускаем автопрокрутку
-    
-            // Останавливаем автопрокрутку, когда мышь на галерее (опционально)
-            const gallery = document.querySelector('.gallery-container');
-            gallery.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-            gallery.addEventListener('mouseleave', () => startAutoScroll());
-        } else {
-            document.querySelectorAll('.gallery-btn').forEach(btn => btn.style.display = 'none');
-        }
+        });
+        
+        // Закрытие по клавише ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+        
+        // Небольшая проверка на наличие реальных фото: если фото не загрузилось,
+        // плейсхолдеры все равно будут работать, но стили галереи останутся.
+        // Дополнительно: если хотим чтобы caption не конфликтовал с наведением - всё корректно.
     </script>
-    <!-- Обратите внимание: ссылки нужно заменить на ваши актуальные. -->
 </body>
 </html>
